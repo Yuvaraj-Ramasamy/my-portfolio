@@ -234,36 +234,94 @@ function initFormHandlers() {
 
 function handleFormSubmit(e) {
     e.preventDefault();
+
+    // Show loading state
+    const submitBtn = e.target.querySelector('.btn-submit');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.disabled = true;
+
+    // Get form data
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData);
-    console.log('Form submitted:', data);
 
-    let message;
-    if (AppState.currentLang === 'hi') {
-        message = 'संदेश सफलतापूर्वक भेजा गया!';
-    } else if (AppState.currentLang === 'ar') {
-        message = 'تم إرسال الرسالة بنجاح!';
-    } else {
-        message = 'Message sent successfully!';
-    }
+    // EmailJS configuration - Replace with your actual values
+    const serviceID = 'service_atpcpd1'; // Replace with your EmailJS service ID
+    const templateID = 'template_hjaqzck'; // Replace with your EmailJS template ID
+    const publicKey = 'hFmn3XCFmL0RACFF2'; // Replace with your EmailJS public key
 
-    alert(message);
-    e.target.reset();
+    // Prepare template parameters
+    const templateParams = {
+        from_name: data.name,
+        from_email: data.email,
+        subject: data.subject,
+        message: data.message,
+        to_email: 'yuvarajramasamy1234@gmail.com' // Your email address
+    };
+
+    // Send email using EmailJS
+    emailjs.send(serviceID, templateID, templateParams, publicKey)
+        .then(function(response) {
+            console.log('Email sent successfully:', response);
+
+            // Show success message
+            let successMessage;
+            if (AppState.currentLang === 'hi') {
+                successMessage = 'संदेश सफलतापूर्वक भेजा गया!';
+            } else if (AppState.currentLang === 'ar') {
+                successMessage = 'تم إرسال الرسالة بنجاح!';
+            } else {
+                successMessage = 'Message sent successfully!';
+            }
+
+            alert(successMessage);
+            e.target.reset();
+        })
+        .catch(function(error) {
+            console.error('Email sending failed:', error);
+
+            // Show error message
+            let errorMessage;
+            if (AppState.currentLang === 'hi') {
+                errorMessage = 'संदेश भेजने में विफल। कृपया बाद में पुनः प्रयास करें।';
+            } else if (AppState.currentLang === 'ar') {
+                errorMessage = 'فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى لاحقاً.';
+            } else {
+                errorMessage = 'Failed to send message. Please try again later.';
+            }
+
+            alert(errorMessage);
+        })
+        .finally(function() {
+            // Reset button state
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
 }
 
 function initMobileMenu() {
     const menuToggle = document.getElementById('menuToggle');
     if (menuToggle) {
         menuToggle.addEventListener('click', toggleMobileMenu);
+        // Add ARIA attributes for accessibility
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.setAttribute('aria-label', 'Toggle navigation menu');
     }
-    
+
     document.addEventListener('click', (e) => {
         const navMenu = document.getElementById('navMenu');
         const menuToggle = document.getElementById('menuToggle');
-        
-        if (AppState.isMenuOpen && 
-            !navMenu.contains(e.target) && 
+
+        if (AppState.isMenuOpen &&
+            !navMenu.contains(e.target) &&
             !menuToggle.contains(e.target)) {
+            toggleMobileMenu();
+        }
+    });
+
+    // Add keyboard navigation support
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && AppState.isMenuOpen) {
             toggleMobileMenu();
         }
     });
