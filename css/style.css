@@ -2578,6 +2578,41 @@ img {
     }
 }
 
+/* ===== TABLET OPTIMIZATIONS (1025px - 1200px) ===== */
+@media screen and (min-width: 1025px) and (max-width: 1200px) {
+    .hero-container {
+        gap: 2.5rem;
+        padding: 0 1.5rem;
+    }
+
+    .hero-name {
+        font-size: 3.2rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
+        max-width: 500px;
+    }
+
+    .hero-image-container {
+        width: 330px;
+        height: 330px;
+    }
+
+    .nav-container {
+        padding: 1rem 1.5rem;
+    }
+
+    .section-container {
+        padding: 0 1.5rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.8rem;
+    }
+}
+
 /* ===== LANDSCAPE MODE (Mobile in landscape) ===== */
 @media screen and (max-height: 500px) and (orientation: landscape) {
     .main-header {
