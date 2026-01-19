@@ -1,0 +1,365 @@
+/* ========================================
+   COMPLETE RESPONSIVE DESIGN - ALL DEVICES
+   Mobile-First with !important overrides for Tailwind
+   ======================================== */
+
+/* ===== BASE MOBILE STYLES (320px+) ===== */
+@media screen and (min-width: 320px) {
+    .nav-menu {
+        display: none !important;
+    }
+
+    .nav-menu.active {
+        display: flex !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+}
+
+/* ===== SMALL PHONES (375px) ===== */
+@media screen and (min-width: 375px) {
+    html {
+        font-size: 13px !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+}
+
+/* ===== MEDIUM PHONES (481px) ===== */
+@media screen and (min-width: 481px) {
+    html {
+        font-size: 14px !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+}
+
+/* ===== SMALL TABLETS (601px) ===== */
+@media screen and (min-width: 601px) {
+    html {
+        font-size: 15px !important;
+    }
+
+    .nav-menu {
+        display: flex !important;
+        position: static !important;
+        flex-direction: row !important;
+        background: transparent !important;
+        padding: 0 !important;
+        width: auto !important;
+    }
+
+    .menu-toggle {
+        display: none !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.5rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr !important;
+        gap: 2rem !important;
+    }
+}
+
+/* ===== MEDIUM TABLETS (769px) ===== */
+@media screen and (min-width: 769px) {
+    html {
+        font-size: 15.5px !important;
+    }
+
+    .nav-menu {
+        display: flex !important;
+        position: static !important;
+        flex-direction: row !important;
+        background: transparent !important;
+        padding: 0 !important;
+        width: auto !important;
+    }
+
+    .menu-toggle {
+        display: none !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 1.8rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+    }
+}
+
+/* ===== LARGE TABLETS (901px) ===== */
+@media screen and (min-width: 901px) {
+    html {
+        font-size: 16px !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr !important;
+        gap: 2.5rem !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2.2rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1.2fr 1fr !important;
+        gap: 2.5rem !important;
+    }
+}
+
+/* ===== SMALL DESKTOPS (1025px) ===== */
+@media screen and (min-width: 1025px) {
+    html {
+        font-size: 16px !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr 0.9fr !important;
+        gap: 2.5rem !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 2rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 2rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr 1.5fr !important;
+        gap: 3rem !important;
+    }
+}
+
+/* ===== MEDIUM DESKTOPS (1201px) ===== */
+@media screen and (min-width: 1201px) {
+    html {
+        font-size: 16px !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1.1fr 1fr !important;
+        gap: 3rem !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 2.2rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 2rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr 1.8fr !important;
+        gap: 3.5rem !important;
+    }
+}
+
+/* ===== LARGE DESKTOPS (1401px) ===== */
+@media screen and (min-width: 1401px) {
+    html {
+        font-size: 16px !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1.2fr 1fr !important;
+        gap: 3.5rem !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 2.5rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 2.2rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr 2fr !important;
+        gap: 4rem !important;
+    }
+}
+
+/* ===== EXTRA LARGE (1601px) ===== */
+@media screen and (min-width: 1601px) {
+    html {
+        font-size: 16px !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1.3fr 1.1fr !important;
+        gap: 4rem !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 2.8rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 2.5rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr 2fr !important;
+        gap: 4.5rem !important;
+    }
+}
+
+/* ===== ULTRA LARGE (1921px+) ===== */
+@media screen and (min-width: 1921px) {
+    html {
+        font-size: 16px !important;
+    }
+
+    .hero-container {
+        grid-template-columns: 1.4fr 1.2fr !important;
+        gap: 5rem !important;
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 3rem !important;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 2.8rem !important;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr 2fr !important;
+        gap: 5rem !important;
+    }
+}
+
+/* ===== LANDSCAPE MODE ===== */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .scroll-indicator {
+        display: none !important;
+    }
+
+    .hero-container {
+        gap: 1rem !important;
+    }
+}
+
+/* ===== PRINT ===== */
+@media print {
+    .main-header,
+    .main-footer,
+    .back-to-top,
+    .scroll-indicator,
+    .menu-toggle {
+        display: none !important;
+    }
+
+    .section {
+        page-break-inside: avoid !important;
+    }
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
