@@ -8,7 +8,28 @@ const AppState = {
 
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
+    initBackToTop();
 });
+
+function initBackToTop() {
+    const backToTopBtn = document.getElementById('backToTop');
+    if (!backToTopBtn) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+    
+    backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
+}
 
 function initializeApp() {
     loadPreferences();
@@ -49,12 +70,7 @@ function setLanguage(lang) {
     const html = document.documentElement;
     const body = document.body;
 
-    if (lang === 'ar') {
-        html.setAttribute('lang', 'ar');
-        html.setAttribute('dir', 'rtl');
-        body.setAttribute('data-lang', 'ar');
-        body.setAttribute('data-dir', 'rtl');
-    } else if (lang === 'hi') {
+    if (lang === 'hi') {
         html.setAttribute('lang', 'hi');
         html.setAttribute('dir', 'ltr');
         body.setAttribute('data-lang', 'hi');
@@ -69,23 +85,23 @@ function setLanguage(lang) {
 }
 
 function updateLanguageUI() {
-    const textElements = document.querySelectorAll('[data-text-en], [data-text-ar]');
+    const textElements = document.querySelectorAll('[data-text-en], [data-text-hi]');
     textElements.forEach(element => {
         const enText = element.getAttribute('data-text-en');
-        const arText = element.getAttribute('data-text-ar');
-        if (AppState.currentLang === 'hi' && arText) {
-            element.textContent = arText;
+        const hiText = element.getAttribute('data-text-hi');
+        if (AppState.currentLang === 'hi' && hiText) {
+            element.textContent = hiText;
         } else if (AppState.currentLang === 'en' && enText) {
             element.textContent = enText;
         }
     });
 
-    const placeholderElements = document.querySelectorAll('[data-placeholder-en], [data-placeholder-ar]');
+    const placeholderElements = document.querySelectorAll('[data-placeholder-en], [data-placeholder-hi]');
     placeholderElements.forEach(element => {
         const enPlaceholder = element.getAttribute('data-placeholder-en');
-        const arPlaceholder = element.getAttribute('data-placeholder-ar');
-        if (AppState.currentLang === 'hi' && arPlaceholder) {
-            element.setAttribute('placeholder', arPlaceholder);
+        const hiPlaceholder = element.getAttribute('data-placeholder-hi');
+        if (AppState.currentLang === 'hi' && hiPlaceholder) {
+            element.setAttribute('placeholder', hiPlaceholder);
         } else if (AppState.currentLang === 'en' && enPlaceholder) {
             element.setAttribute('placeholder', enPlaceholder);
         }
@@ -204,6 +220,28 @@ function updateHeaderOnScroll() {
 }
 
 function initScrollEffects() {
+    // Add scroll progress indicator
+    const scrollIndicator = document.createElement('div');
+    scrollIndicator.className = 'scroll-progress';
+    scrollIndicator.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #c084fc, #a78bfa, #67e8f9);
+        z-index: 9999;
+        width: 0%;
+        transition: width 0.1s ease;
+    `;
+    document.body.appendChild(scrollIndicator);
+    
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrolled = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        scrollIndicator.style.width = scrolled + '%';
+    });
+
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
@@ -229,16 +267,59 @@ function initFormHandlers() {
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', handleFormSubmit);
+        
+        // Add real-time validation
+        const formInputs = contactForm.querySelectorAll('.form-input');
+        formInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                validateFormInput(input);
+            });
+            input.addEventListener('blur', () => {
+                validateFormInput(input);
+            });
+        });
+    }
+}
+
+function validateFormInput(input) {
+    const error = input.parentElement.querySelector('.form-error');
+    if (!input.checkValidity()) {
+        input.classList.add('error');
+        if (error) error.style.display = 'block';
+    } else {
+        input.classList.remove('error');
+        if (error) error.style.display = 'none';
     }
 }
 
 function handleFormSubmit(e) {
     e.preventDefault();
 
+    // Form validation
+    const form = e.target;
+    const formInputs = form.querySelectorAll('.form-input');
+    let isValid = true;
+
+    formInputs.forEach(input => {
+        const error = input.parentElement.querySelector('.form-error');
+        if (!input.checkValidity()) {
+            isValid = false;
+            input.classList.add('error');
+            if (error) error.style.display = 'block';
+        } else {
+            input.classList.remove('error');
+            if (error) error.style.display = 'none';
+        }
+    });
+
+    if (!isValid) {
+        return;
+    }
+
     // Show loading state
     const submitBtn = e.target.querySelector('.btn-submit');
     const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span data-text-en="Sending..." data-text-hi="भेज रहे हैं...">Sending...</span>';
     submitBtn.disabled = true;
 
     // Get form data
@@ -268,14 +349,22 @@ function handleFormSubmit(e) {
             let successMessage;
             if (AppState.currentLang === 'hi') {
                 successMessage = 'संदेश सफलतापूर्वक भेजा गया!';
-            } else if (AppState.currentLang === 'ar') {
-                successMessage = 'تم إرسال الرسالة بنجاح!';
             } else {
                 successMessage = 'Message sent successfully!';
             }
 
+            const formStatus = document.getElementById('formStatus');
+            if (formStatus) {
+                formStatus.className = 'form-status success';
+                formStatus.textContent = successMessage;
+                formStatus.style.display = 'block';
+            }
+
             alert(successMessage);
             e.target.reset();
+            setTimeout(() => {
+                if (formStatus) formStatus.style.display = 'none';
+            }, 5000);
         })
         .catch(function(error) {
             console.error('Email sending failed:', error);
@@ -284,10 +373,15 @@ function handleFormSubmit(e) {
             let errorMessage;
             if (AppState.currentLang === 'hi') {
                 errorMessage = 'संदेश भेजने में विफल। कृपया बाद में पुनः प्रयास करें।';
-            } else if (AppState.currentLang === 'ar') {
-                errorMessage = 'فشل في إرسال الرسالة. يرجى المحاولة مرة أخرى لاحقاً.';
             } else {
                 errorMessage = 'Failed to send message. Please try again later.';
+            }
+
+            const formStatus = document.getElementById('formStatus');
+            if (formStatus) {
+                formStatus.className = 'form-status error';
+                formStatus.textContent = errorMessage;
+                formStatus.style.display = 'block';
             }
 
             alert(errorMessage);

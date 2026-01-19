@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Styles Preview - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            padding: 2rem;
+        }
+        .preview-section {
+            margin-bottom: 4rem;
+            background: var(--bg-darker);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+        .preview-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .code-example {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            color: var(--text-secondary);
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body class="body-main" data-theme="dark" data-dir="ltr">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h1 style="color: var(--primary); margin-bottom: 2rem;">
+            <i class="fas fa-palette"></i> Enhanced Styles Preview
+        </h1>
+
+        <!-- Alert Boxes Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">🚨 Alert Boxes</h2>
+            
+            <div class="alert alert-success">
+                <i class="alert-icon fas fa-check-circle"></i>
+                <div class="alert-content">
+                    <div class="alert-title">Success!</div>
+                    <div class="alert-message">Your message was sent successfully. Thank you for reaching out!</div>
+                </div>
+                <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
+            </div>
+
+            <div class="alert alert-warning" style="margin-top: 1rem;">
+                <i class="alert-icon fas fa-exclamation-circle"></i>
+                <div class="alert-content">
+                    <div class="alert-title">Warning</div>
+                    <div class="alert-message">Please review the form fields before submitting. Some fields may need correction.</div>
+                </div>
+                <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
+            </div>
+
+            <div class="alert alert-danger" style="margin-top: 1rem;">
+                <i class="alert-icon fas fa-times-circle"></i>
+                <div class="alert-content">
+                    <div class="alert-title">Error</div>
+                    <div class="alert-message">Something went wrong. Please check your connection and try again.</div>
+                </div>
+                <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 1rem;">
+                <i class="alert-icon fas fa-info-circle"></i>
+                <div class="alert-content">
+                    <div class="alert-title">Information</div>
+                    <div class="alert-message">This is an informational message. Your submission is pending review.</div>
+                </div>
+                <button class="alert-close" onclick="this.parentElement.remove()">&times;</button>
+            </div>
+
+            <div class="code-example">
+&lt;div class="alert alert-success"&gt;
+    &lt;i class="alert-icon fas fa-check-circle"&gt;&lt;/i&gt;
+    &lt;div class="alert-content"&gt;
+        &lt;div class="alert-title"&gt;Success!&lt;/div&gt;
+        &lt;div class="alert-message"&gt;Your message was sent successfully.&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;button class="alert-close"&gt;&times;&lt;/button&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Cards Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">📦 Card Components</h2>
+            
+            <div class="preview-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Feature One</h3>
+                        <p class="card-subtitle">Enhanced styling</p>
+                    </div>
+                    <div class="card-content">
+                        <p>Beautiful gradient borders and smooth hover animations make your content stand out.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small style="color: var(--text-muted);">Last updated today</small>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Feature Two</h3>
+                        <p class="card-subtitle">Modern design</p>
+                    </div>
+                    <div class="card-content">
+                        <p>Radial gradient backgrounds and smooth transitions create a professional appearance.</p>
+                    </div>
+                    <div class="card-footer">
+                        <small style="color: var(--text-muted);">Click to interact</small>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Feature Three</h3>
+                        <p class="card-subtitle">Flexible structure</p>
+                    </div>
+                    <div class="card-content">
+                        <p>Use cards for any content type - testimonials, features, products, or anything else!</p>
+                    </div>
+                    <div class="card-footer">
+                        <small style="color: var(--text-muted);">Fully responsive</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-example">
+&lt;div class="card"&gt;
+    &lt;div class="card-header"&gt;
+        &lt;h3 class="card-title"&gt;Card Title&lt;/h3&gt;
+        &lt;p class="card-subtitle"&gt;Optional subtitle&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="card-content"&gt;
+        &lt;p&gt;Your content here...&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="card-footer"&gt;
+        &lt;p&gt;Optional footer&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Form Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">📝 Enhanced Form Inputs</h2>
+            
+            <form style="max-width: 500px;">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" class="form-input" placeholder="Enter your name" value="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="your@email.com" value="john@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" class="form-input" placeholder="What is this about?" value="Portfolio Inquiry">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" class="form-input form-textarea" placeholder="Your message here...">I'm impressed with your enhanced styling and would like to know more about your services.</textarea>
+                </div>
+
+                <button type="submit" class="btn btn-submit" style="margin-bottom: 1rem;">
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+
+            <div class="code-example">
+&lt;input type="text" class="form-input" placeholder="Name"&gt;
+&lt;textarea class="form-input form-textarea" placeholder="Message"&gt;&lt;/textarea&gt;
+&lt;button class="btn btn-submit"&gt;Send&lt;/button&gt;
+            </div>
+        </div>
+
+        <!-- Contact Cards Preview -->
+        <div class="preview-section">
+            <h2 class="preview-title">📬 Contact Cards</h2>
+            
+            <div class="preview-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4 class="contact-label">Email</h4>
+                        <a href="mailto:example@email.com" class="contact-value">example@email.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4 class="contact-label">Phone</h4>
+                        <a href="tel:+1234567890" class="contact-value">+1 (234) 567-890</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h4 class="contact-label">Location</h4>
+                        <span class="contact-value">City, Country</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-example">
+&lt;div class="contact-item"&gt;
+    &lt;div class="contact-icon"&gt;
+        &lt;i class="fas fa-envelope"&gt;&lt;/i&gt;
+    &lt;/div&gt;
+    &lt;div class="contact-details"&gt;
+        &lt;h4 class="contact-label"&gt;Email&lt;/h4&gt;
+        &lt;a href="mailto:example@email.com" class="contact-value"&gt;
+            example@email.com
+        &lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="preview-section" style="background: linear-gradient(135deg, rgba(192,132,252,0.1), rgba(103,232,249,0.05));">
+            <h2 class="preview-title">✨ Enhancement Summary</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                <div>
+                    <h4 style="color: var(--primary); margin-bottom: 0.5rem;">
+                        <i class="fas fa-star"></i> Gradient Effects
+                    </h4>
+                    <p style="color: var(--text-secondary);">Beautiful gradient borders and backgrounds on all interactive elements.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--secondary); margin-bottom: 0.5rem;">
+                        <i class="fas fa-bolt"></i> Smooth Animations
+                    </h4>
+                    <p style="color: var(--text-secondary);">Cubic-bezier timing functions for natural, fluid motion.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--cyan); margin-bottom: 0.5rem;">
+                        <i class="fas fa-mobile-alt"></i> Responsive
+                    </h4>
+                    <p style="color: var(--text-secondary);">Fully optimized for all screen sizes and devices.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--green); margin-bottom: 0.5rem;">
+                        <i class="fas fa-shield-alt"></i> Accessible
+                    </h4>
+                    <p style="color: var(--text-secondary);">Maintains color contrast and keyboard navigation support.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent); margin-bottom: 0.5rem;">
+                        <i class="fas fa-cog"></i> Customizable
+                    </h4>
+                    <p style="color: var(--text-secondary);">Easy to modify colors and effects with CSS variables.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--purple); margin-bottom: 0.5rem;">
+                        <i class="fas fa-rocket"></i> Performance
+                    </h4>
+                    <p style="color: var(--text-secondary);">Hardware-accelerated transforms for smooth interactions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem; padding: 2rem; border-top: 2px solid var(--border);">
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                All styles are ready to use! Check the documentation files for more details.
+            </p>
+            <p style="color: var(--text-secondary);">
+                📄 See <strong>STYLE_ENHANCEMENTS.md</strong> and <strong>QUICK_START.md</strong> for full documentation.
+            </p>
+        </div>
+    </div>
+</body>
+</html>
