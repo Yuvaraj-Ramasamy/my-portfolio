@@ -54,69 +54,88 @@ function loadPreferences() {
 function initLanguage() {
     const langToggle = document.getElementById('langToggle');
     if (langToggle) {
-        langToggle.addEventListener('click', toggleLanguage);
+        langToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleLanguage();
+        });
     }
     setLanguage(AppState.currentLang);
 }
 
 function toggleLanguage() {
-    const newLang = AppState.currentLang === 'en' ? 'hi' : 'en';
-    setLanguage(newLang);
-    localStorage.setItem('portfolio-lang', newLang);
+    try {
+        const newLang = AppState.currentLang === 'en' ? 'hi' : 'en';
+        setLanguage(newLang);
+        localStorage.setItem('portfolio-lang', newLang);
+        console.log('Language switched to:', newLang);
+    } catch (error) {
+        console.error('Error toggling language:', error);
+    }
 }
 
 function setLanguage(lang) {
-    AppState.currentLang = lang;
-    const html = document.documentElement;
-    const body = document.body;
+    try {
+        AppState.currentLang = lang;
+        const html = document.documentElement;
+        const body = document.body;
 
-    if (lang === 'hi') {
-        html.setAttribute('lang', 'hi');
-        html.setAttribute('dir', 'ltr');
-        body.setAttribute('data-lang', 'hi');
-        body.setAttribute('data-dir', 'ltr');
-    } else {
-        html.setAttribute('lang', 'en');
-        html.setAttribute('dir', 'ltr');
-        body.setAttribute('data-lang', 'en');
-        body.setAttribute('data-dir', 'ltr');
+        if (lang === 'hi') {
+            html.setAttribute('lang', 'hi');
+            html.setAttribute('dir', 'ltr');
+            body.setAttribute('data-lang', 'hi');
+            body.setAttribute('data-dir', 'ltr');
+        } else {
+            html.setAttribute('lang', 'en');
+            html.setAttribute('dir', 'ltr');
+            body.setAttribute('data-lang', 'en');
+            body.setAttribute('data-dir', 'ltr');
+        }
+        updateLanguageUI();
+    } catch (error) {
+        console.error('Error setting language:', error);
     }
-    updateLanguageUI();
 }
 
 function updateLanguageUI() {
-    const textElements = document.querySelectorAll('[data-text-en], [data-text-hi]');
-    textElements.forEach(element => {
-        const enText = element.getAttribute('data-text-en');
-        const hiText = element.getAttribute('data-text-hi');
-        if (AppState.currentLang === 'hi' && hiText) {
-            element.textContent = hiText;
-        } else if (AppState.currentLang === 'en' && enText) {
-            element.textContent = enText;
-        }
-    });
+    try {
+        // Update text elements
+        const textElements = document.querySelectorAll('[data-text-en], [data-text-hi]');
+        textElements.forEach(element => {
+            const enText = element.getAttribute('data-text-en');
+            const hiText = element.getAttribute('data-text-hi');
+            
+            if (AppState.currentLang === 'hi' && hiText) {
+                element.textContent = hiText;
+            } else if (AppState.currentLang === 'en' && enText) {
+                element.textContent = enText;
+            }
+        });
 
-    const placeholderElements = document.querySelectorAll('[data-placeholder-en], [data-placeholder-hi]');
-    placeholderElements.forEach(element => {
-        const enPlaceholder = element.getAttribute('data-placeholder-en');
-        const hiPlaceholder = element.getAttribute('data-placeholder-hi');
-        if (AppState.currentLang === 'hi' && hiPlaceholder) {
-            element.setAttribute('placeholder', hiPlaceholder);
-        } else if (AppState.currentLang === 'en' && enPlaceholder) {
-            element.setAttribute('placeholder', enPlaceholder);
-        }
-    });
+        // Update placeholder attributes
+        const placeholderElements = document.querySelectorAll('[data-placeholder-en], [data-placeholder-hi]');
+        placeholderElements.forEach(element => {
+            const enPlaceholder = element.getAttribute('data-placeholder-en');
+            const hiPlaceholder = element.getAttribute('data-placeholder-hi');
+            
+            if (AppState.currentLang === 'hi' && hiPlaceholder) {
+                element.setAttribute('placeholder', hiPlaceholder);
+            } else if (AppState.currentLang === 'en' && enPlaceholder) {
+                element.setAttribute('placeholder', enPlaceholder);
+            }
+        });
 
-    const langToggle = document.getElementById('langToggle');
-    if (langToggle) {
-        const langText = langToggle.querySelector('.lang-text');
-        if (langText) {
-            if (AppState.currentLang === 'en') {
-                langText.textContent = 'HI';
-            } else {
-                langText.textContent = 'EN';
+        // Update language toggle button
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) {
+            const langText = langToggle.querySelector('.lang-text');
+            if (langText) {
+                langText.textContent = AppState.currentLang === 'en' ? 'HI' : 'EN';
             }
         }
+        
+        console.log('Language UI updated for:', AppState.currentLang);
+    } catch (error) {
+        console.error('Error updating language UI:', error);
     }
 }
 
